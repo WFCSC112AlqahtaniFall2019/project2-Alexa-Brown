@@ -1,3 +1,9 @@
+/*Alexa Brown
+ * CSC 112
+ * Project 2
+ */
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
