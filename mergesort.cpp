@@ -10,7 +10,51 @@ using namespace std;
 #include <cassert>
 
 // function declarations
-void mergeSortedLists(vector<int>& a, vector<int>& tmp, int left, int middle, int right);
+void mergeSortedLists(vector<int>& a, vector<int>& temp, int left, int middle, int right) {
+
+    int i, j, k;
+
+    int left1 = middle - left + 1; //size of left vector
+    int right1 = right - middle; //size of right vector
+
+    vector<int> leftVector(left1);
+    vector<int> rightVector(right1);
+
+    //used brackets instead of .at() because .at() was continuing to throw an error
+    for (i = 0; i < left1; i++) {
+        leftVector[i] = a[left + i];
+    }
+    for (j = 0; j < right1; j++) {
+        rightVector[j] = a[middle + j + 1];
+    }
+    i=0;
+    j=0;
+    //reset i and j
+
+    for (k = left; (i < left1) && (j < right1); k++) {
+        if (leftVector[i] < rightVector[j]) {
+            a[k] = leftVector[i++];
+        } else {
+            a[k] = rightVector[j++];
+        }
+    }
+
+    while (i < left1) {
+        a[k++] = leftVector[i++];
+    }
+    while (j < right1) {
+        a[k++] = rightVector[j++];
+    }
+
+
+    /*for (int m = 0; m < a.size(); m++){
+        a[m] = temp[m];
+    }*/
+
+
+}
+
+
 
 void mergeSort(vector<int>& a, vector<int>& temp, int left, int right){
     int middle;
@@ -28,74 +72,6 @@ void mergeSort(vector<int>& a, vector<int>& temp, int left, int right){
 
     return;
 }
-void mergeSortedLists(vector<int>& a, vector<int>& temp, int left, int middle, int right) {
-
-    int i;
-    int j;
-    int h = left;
-    //int j = middle + 1;
-    int k;
-
-    int left1 = middle - left + 1;
-    int right1 = right - middle;
-
-    vector<int> leftVector(left1);
-    vector<int> rightVector(right1);
-
-   // while ((left <= middle) && (j <= right)) { //looping over both sides
-
-   /*if (a.at(h) <= a.at(j)) {
-            temp.at(i) = a.at(h);
-            h++;
-        } else {
-            temp.at(i) = a.at(j);
-            j++;
-        }
-        i++;
-
-    if (h < middle){
-        for (int k = j; k <= right; k++) {
-            temp.at(i) = a.at(k);
-            i++;
-        }
-        }
-    else {
-        for (int k = h; k <= middle; k++) {
-            temp.at(i) = a.at(k);
-            i++;
-        }
-    }
-
-        for (int k = left; k <= right; k++){
-            a.at(k) = temp.at(k);
-        }*/
-       for (i = 0; i < left1; i++) {
-            leftVector.at(i) = a.at(left + 1);
-        }
-        for (j = 0; j < right1; j++) {
-            rightVector.at(j) = a.at(middle + j + 1);
-        }
-        i=0;
-        j=0;
-
-        for (int k = left; i < left1 && j < right1; k++) {
-            if (leftVector.at(i) < rightVector.at(j)) {
-                a.at(k) = leftVector.at(i++);
-            } else {
-                a.at(k) = rightVector.at(j++);
-            }
-        }
-
-        while (i < left1) {
-            a.at(k++) = leftVector.at(i++);
-        }
-        while (j < right1) {
-            a.at(k++) = rightVector.at(j++);
-        }
-
-
-   }
-
 
 int main() {
 
@@ -122,7 +98,7 @@ int main() {
         cout << v.at(i) << " ";
     }
 
-    mergeSort(v, temp, 0, length);
+    mergeSort(v, temp, 0, length-1);
 
   /*  for(int i =0; i <v.size(); i++){
         v.at(i) = rand() % length + 1;
