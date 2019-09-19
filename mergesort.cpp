@@ -112,7 +112,7 @@ int main() {
     for(int i = 1; i < testVector.size() - 1; i++) {
         assert(testVector.at(i-1) <= testVector.at(i));
     }
-    cout << "Expecting the sorted list to be: 1 3 5 8" << endl;
+    cout << "Original list: 3 5 1 8. Expecting the sorted list to be: 1 3 5 8" << endl;
     cout << "Unit testing sorted list: " << endl;
     for (int i = 0; i < testVector.size(); i++) {
         cout << testVector.at(i) << " ";
