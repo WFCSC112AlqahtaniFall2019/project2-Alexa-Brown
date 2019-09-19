@@ -103,22 +103,35 @@ int main() {
         v.at(i) = rand() % length + 1;
     }
 
+    cout << "Unit testing started: "<< endl;
+    //testing MergeSortedLists to ensure the vector is still the same size
+    //want to make sure it stays the same size before calling mergeSort
+
+    vector <int> testVector {3, 5, 1, 8}; //a vector to ensure that the numbers are sorting correctly
+    mergeSortedLists(testVector, temp, 0, 1,  3);
+    for(int i = 1; i < testVector.size() - 1; i++) {
+        assert(testVector.at(i-1) <= testVector.at(i));
+    }
+    cout << "Expecting the sorted list to be: 1 3 5 8" << endl;
+    cout << "Unit testing sorted list: " << endl;
+    for (int i = 0; i < testVector.size(); i++) {
+        cout << testVector.at(i) << " ";
+    }
+
+    cout << endl;
     // initialize and print the original random list
     cout << "The original List is" << endl;
     for (int i= 0; i < length; i++) {
         cout << v.at(i) << " ";
     }
+    cout << endl;
 
-    //testing MergeSortedLists to ensure the vector is still the same size
-    //want to make sure it stays the same size before calling mergeSort
-    int middle = v.size() /2;
-    mergeSortedLists(v,temp, 0, middle, length-1);
-    assert(v.size() == length);
 
     // sort v
     mergeSort(v, temp, 0, length-1);
 
-    cout << endl;
+
+    cout << endl; //making it easier to read
     cout << "The sorted list is: " << endl;
 
     for (int i = 0; i < v.size(); i++) {
